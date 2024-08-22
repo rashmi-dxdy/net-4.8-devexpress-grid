@@ -1,0 +1,68 @@
+# Ignore build output and other artifacts
+[Bb]in/
+[Oo]bj/
+**/TestResults/
+**/Debug/
+**/Release/
+
+# DevExpress specific folders (if using DevExpress WebForms)
+DevExpress.Web/Assets/
+DevExpress.Web/bin/
+DevExpress/WebSite/
+
+# Ignore package files
+*.nupkg
+*.snupkg
+*.nuspec
+*.suo
+*.user
+*.rsuser
+*.sln.docstates
+*.vs/
+
+# NuGet dependencies
+packages/
+*.nupkg
+project.lock.json
+project.fragment.lock.json
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# ASP.NET MVC user-specific files
+App_Data/
+*.ldf
+*.mdf
+
+# Visual Studio Code workspace settings
+.vscode/
+
+# Recycle bin
+$RECYCLE.BIN/
+
+# User-specific configuration files
+*.userosscache
+*.userprefs
+
+# Visual Studio profiler
+*.psess
+*.vsp
+*.vspx
+*.sap
+
+# DevExpress reports cache
+*.vspscc
+*.resx
+
+# DevExpress web resources
+dx-resource.axd
+*.dxpsheet
+*.dxsflayout
+
+# Ignore publish output
+.publish/
+
+# Ignore other common system files
+*.bak
+*.log

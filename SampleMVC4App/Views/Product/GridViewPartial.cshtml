@@ -1,0 +1,61 @@
+﻿@{ 
+    Html.EnableClientValidation();
+    Html.EnableUnobtrusiveJavaScript();
+}
+
+@Html.DevExpress().GridView(settings =>
+{
+    settings.Name = "gridView";
+    settings.KeyFieldName = "ProductID"; // The primary key column
+
+    settings.CallbackRouteValues = new { Controller = "Product", Action = "GridViewPartial" };
+
+    //settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Product", Action = "EditModesAddNewPartial" };
+    //settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Product", Action = "EditModesUpdatePartial" };
+    //settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Product", Action = "EditModesDeletePartial" };
+
+    settings.EnableRowsCache = true;
+    settings.Settings.ShowFilterRow = true;
+    settings.Settings.ShowGroupPanel = true;
+    settings.Settings.ShowFooter = true;
+
+    settings.Columns.Add(column =>
+    {
+        column.FieldName = "ProductID";
+        column.Caption = "Product ID";
+        column.Visible = true;
+    });
+
+    settings.Columns.Add(column =>
+    {
+        column.FieldName = "ProductName";
+        column.Caption = "Product Name";
+        column.Visible = true;
+    });
+
+    settings.Columns.Add(column =>
+    {
+        column.FieldName = "Price";
+        column.Caption = "Price";
+        column.Visible = true;
+        column.PropertiesEdit.DisplayFormatString = "c"; // Currency format
+    });
+
+    settings.SettingsPager.Visible = true; // Enable pagination
+    settings.SettingsPager.PageSize = 10; // Set page size
+
+    settings.ClientSideEvents.Init = "function(s, e) { s.PerformCallback(); }";
+    settings.ClientSideEvents.BeginCallback = "function(s, e) { OnStartCallback(s, e); }";
+    settings.ClientSideEvents.EndCallback = "function(s, e) { OnEndCallback(s, e); }";
+
+    //settings.CommandColumn.Visible = true;
+    //settings.CommandColumn.ShowNewButton = true;
+    //settings.CommandColumn.ShowEditButton = true;
+    //settings.CommandColumn.ShowDeleteButton = true;
+
+    /*}).Bind(Model).GetHtml()*/
+}).BindToEF(string.Empty, string.Empty, (s, e) =>
+{
+    e.QueryableSource = SampleMVC4App.Models.DataProviders.ApplicationDataProvider.DB.Products;
+    e.KeyExpression = "ProductID";
+}).GetHtml()
